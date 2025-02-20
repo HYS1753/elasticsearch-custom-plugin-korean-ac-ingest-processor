@@ -1,0 +1,44 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath "org.elasticsearch.gradle:build-tools:8.17.0"
+  }
+}
+
+apply plugin: 'elasticsearch.esplugin'
+apply plugin: 'elasticsearch.yaml-rest-test'
+
+esplugin {
+  name 'korean-ac-ingest-processor'
+  description 'elasticsearch custom plugin - korean-ac-ingest-processor (jamo, choseong, kor2eng, eng2kor) by hys1753@naver.com'
+  classname 'elasticsearch.custom.plugin.KoreanAcIngestPlugin'
+}
+
+group = "elasticsearch.plugin"
+version = "8.17.0"
+sourceCompatibility = '17'
+
+
+repositories {
+  mavenCentral()
+}
+
+
+dependencies {
+  implementation group: 'org.elasticsearch', name: 'elasticsearch', version: '8.17.0'
+  implementation 'org.apache.commons:commons-lang3:3.16.0'
+  yamlRestTestRuntimeOnly "org.apache.logging.log4j:log4j-core"
+
+  testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
+  testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+
+}
+
+test {
+  useJUnitPlatform()
+}
+
