@@ -78,6 +78,9 @@ public class KoreanAcIngestProcessor extends AbstractProcessor {
         Object targetObject = document.getFieldValue(targetFieldName, Object.class, true);
 
         if (targetObject instanceof String targetText) {
+            // 공백 제거
+            targetText = targetText.replaceAll("\\s", "");
+
             // 자동완성 프로세스
             // 1. 초성 분리
             if (activeChoseongFilter) {
